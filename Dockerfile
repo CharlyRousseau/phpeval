@@ -16,3 +16,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Copy your custom apache2.conf
 COPY apache2.conf /etc/apache2/apache2.conf
+
+# Only for deployment
+# Copy your application code into the image
+COPY . /var/www/html
+
+# Set appropriate permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
